@@ -67,7 +67,7 @@ List<dynamic> categories = [
   }
 ];
 
-const restaurants = [
+List<dynamic> restaurants = [
   {
     "_id": "6530ebbcc9e72013e5b65933",
     "title": "Lapisara Eatery",
@@ -194,7 +194,7 @@ List <Map<String, dynamic>> foods = [
     "code": "41007428",
     "isAvailable": true,
     "restaurant": "6530ea6bc9e72013e5b6592d",
-    "rating": 4.7,
+    "rating": 3,
     "ratingCount": "310",
     "description":
         "A traditional Italian pasta dish with creamy egg sauce, pancetta, and cheese.",
@@ -221,7 +221,7 @@ List <Map<String, dynamic>> foods = [
     "code": "41007428",
     "isAvailable": true,
     "restaurant": "6530ea6bc9e72013e5b6592d",
-    "rating": 4.6,
+    "rating": 4,
     "ratingCount": "230",
     "description":
         "A refreshing mix of organic vegetables, nuts, seeds, and a tangy vinaigrette.",

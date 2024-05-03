@@ -7,6 +7,8 @@ import 'package:foodly/constants/constants.dart';
 import 'package:foodly/views/home/widgets/all_fastest_foods.dart';
 import 'package:foodly/views/home/widgets/all_near_by_restaurants.dart';
 import 'package:foodly/views/home/widgets/category_list.dart';
+import 'package:foodly/views/home/widgets/food_list.dart';
+import 'package:foodly/views/home/widgets/near_by_restaurants_list.dart';
 import 'package:foodly/views/home/widgets/recommendations.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +21,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: kPrimary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(130.h),
-        child: CustomAppBar(),
+        child: const CustomAppBar(),
       ),
       body: SafeArea(
         child: CustomContainer(
@@ -29,27 +31,30 @@ class HomePage extends StatelessWidget {
               Heading(
                   text: "Nearby Restaurants",
                   onTap: (){
-                    Get.to(() => AllNearByRestaurants(),
+                    Get.to(() => const AllNearByRestaurants(),
                       transition: Transition.zoom,
                       duration: const Duration(milliseconds: 900)
                     );
                   }),
+              const NearByRestaurants(),
               Heading(
                   text: "Try something new",
                   onTap: (){
-                    Get.to(() => Recommendations(),
+                    Get.to(() => const Recommendations(),
                       transition: Transition.zoom,
-                      duration: Duration(milliseconds: 900)
+                      duration: const Duration(milliseconds: 900)
                     );
                   }),
+              const FoodList(),
               Heading(
                   text: "Food closer to you",
                   onTap: (){
-                    Get.to(() => AllFastestFoods(),
+                    Get.to(() => const AllFastestFoods(),
                       transition: Transition.zoom,
-                      duration: Duration(milliseconds: 900)
+                      duration: const Duration(milliseconds: 900)
                     );
-                  })
+                  }),
+              const FoodList()
             ],
           )),
       ),

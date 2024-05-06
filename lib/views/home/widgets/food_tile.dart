@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:foodly/common/app_style.dart';
 import 'package:foodly/common/reusable_text.dart';
 import 'package:foodly/constants/constants.dart';
 
-class RestaurantTile extends StatelessWidget {
+class FoodTile extends StatelessWidget {
+  const FoodTile({super.key, required this.food});
 
-  const RestaurantTile({super.key, required this.restaurant});
-
-  final dynamic restaurant;
+  final dynamic food;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,8 @@ class RestaurantTile extends StatelessWidget {
             height: 70.h,
             width: width,
             decoration: BoxDecoration(
-              color: kOffWhite,
-              borderRadius: BorderRadius.circular(9.r)
+                color: kOffWhite,
+                borderRadius: BorderRadius.circular(9.r)
             ),
             child: Container(
               padding: EdgeInsets.all(4.r),
@@ -32,7 +32,7 @@ class RestaurantTile extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.all(
-                      Radius.circular(12.r)
+                        Radius.circular(12.r)
                     ),
                     child: Stack(
                       children: [
@@ -40,11 +40,11 @@ class RestaurantTile extends StatelessWidget {
                           width: 70.w,
                           height: 70.h,
                           child: Image.network(
-                              restaurant["imageUrl"],
+                            food["imageUrl"],
                             fit: BoxFit.cover,
                           ),
                         ),
-                        
+
                         Positioned(
                             bottom: 0,
                             child: Container(
@@ -71,17 +71,37 @@ class RestaurantTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ReusableText(
-                          text: restaurant["title"],
-                          style: appStyle(11, kDark, FontWeight.w400)),
+                          text: food["title"],
+                          style: appStyle(14, kDark, FontWeight.w400)),
                       ReusableText(
-                          text: "Delivery time: ${restaurant["time"]}",
-                          style: appStyle(11, kGray, FontWeight.w400)),
+                          text: "Delivery time: ${food["time"]}",
+                          style: appStyle(13, kGray, FontWeight.w400)),
                       SizedBox(
                         width: width * 0.7,
-                        child: Text(
-                            restaurant["coords"]["address"],
-                            overflow: TextOverflow.ellipsis,
-                            style: appStyle(9, kGray, FontWeight.w400)),
+                        height: 19.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: food["additives"].length,
+                            itemBuilder: (context, i){
+                            var additive = food["additives"][i];
+
+                              return Container(
+                                margin: EdgeInsets.only(right: 5.w),
+                                decoration: BoxDecoration(
+                                  color: kSecondaryLight,
+                                  borderRadius: BorderRadius.all(Radius.circular(9.r))
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.h),
+                                    child: ReusableText(
+                                      text: additive["title"],
+                                    style: appStyle(12, kGray, FontWeight.w400),),
+                                  ),
+                                ),
+                              );
+                            },
+                        ),
                       )
                     ],
                   )
@@ -94,16 +114,35 @@ class RestaurantTile extends StatelessWidget {
               top: 6.h,
               child: Container(
                 width: 60.w,
+                height: 19.h,
+                decoration: BoxDecoration(
+                    color: kPrimary,
+                    borderRadius: BorderRadius.circular(10.r)
+                ),
+                child: Center(
+                  child: ReusableText(text:"\$ ${food["price"].toStringAsFixed(2)}",
+                    style: appStyle(12, kLightWhite, FontWeight.w600),
+                  ),
+                ),
+              )),
+          Positioned(
+              right: 70.w,
+              top: 6.h,
+              child: GestureDetector(
+                onTap: (){},
+                child: Container(
+                  width: 19.w,
                   height: 19.h,
                   decoration: BoxDecoration(
-                    color: restaurant["isAvailable"] == true || restaurant["isAvailable"] == null
-                    ? kPrimary : kGrayLight,
-                    borderRadius: BorderRadius.circular(10.r)
+                      color: kSecondary,
+                      borderRadius: BorderRadius.circular(10.r)
                   ),
-                child: Center(
-                  child: ReusableText(text: restaurant["isAvailable"] == true || restaurant["isAvailable"] == null
-                    ? "Open" : "Closed",
-                  style: appStyle(12, kLightWhite, FontWeight.w600),
+                  child: Center(
+                    child: Icon(
+                        MaterialCommunityIcons.cart_plus,
+                        size: 15.h,
+                      color: kLightWhite,
+                    ),
                   ),
                 ),
               ))
